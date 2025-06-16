@@ -6,6 +6,7 @@ from domain.entities.recipe.value_objects import (
     RecipeDetails,
     RecipeInstruction,
 )
+from domain.entities.user.role import Role, RoleEnum
 
 from .image import RecipeImage
 
@@ -31,6 +32,25 @@ class Recipe(Entity):
 
     def is_owner(self, user_id: int) -> bool:
         return self.author_id.value == user_id
+
+    def can_mutate(self, user_id: int, role: Role) -> bool:
+        return role == RoleEnum.ADMIN.value or self.is_owner(user_id)
+
+    def ensure_can_mutate(self, user_id: int, role: Role):
+        if not self.can_mutate(user_id, role):
+            raise PermissionError(
+                "Insufficient permissions to delete this recipe."
+            )
+
+    def update(
+        self,
+        content: RecipeContent,
+        details: RecipeDetails,
+        instruction: RecipeInstruction,
+    ):
+        self.content = content
+        self.details = details
+        self.instruction = instruction
 
     def add_image(self, image: RecipeImage) -> None:
         self.images.append(image)
