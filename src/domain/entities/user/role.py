@@ -7,7 +7,7 @@ class Role:
     Entity representing a user role.
     """
 
-    role_id: int
+    role_id: int | None
     name: str
     description: str
 

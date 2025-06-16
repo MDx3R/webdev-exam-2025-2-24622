@@ -10,7 +10,7 @@ class Review:
     Aggregate root for Review.
     """
 
-    review_id: int
+    review_id: int | None
     recipe_id: int
     user_id: int
     rating: int

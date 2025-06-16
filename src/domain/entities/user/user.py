@@ -9,7 +9,7 @@ class User:
     Aggregate root for User.
     """
 
-    user_id: int
+    user_id: int | None
     username: str
     password_hash: str
     last_name: str
