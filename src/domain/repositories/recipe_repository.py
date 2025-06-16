@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 from collections.abc import Sequence
 
-from domain.entities.entity import Id
 from domain.entities.recipe.recipe import Recipe
 
 
@@ -11,7 +10,7 @@ class IRecipeRepository(ABC):
     """
 
     @abstractmethod
-    def get_by_id(self, recipe_id: Id) -> Recipe: ...
+    def get_by_id(self, recipe_id: int) -> Recipe: ...
     @abstractmethod
     def get_all(self, page: int, per_page: int) -> Sequence[Recipe]: ...
     @abstractmethod
