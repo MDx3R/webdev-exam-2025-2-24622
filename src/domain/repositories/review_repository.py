@@ -4,7 +4,7 @@ from collections.abc import Sequence
 from domain.entities.review.review import Review
 
 
-class ReviewRepository(ABC):
+class IReviewRepository(ABC):
     """
     Interface for Review aggregate repository.
     """
