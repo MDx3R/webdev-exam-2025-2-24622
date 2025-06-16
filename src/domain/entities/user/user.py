@@ -18,8 +18,10 @@ class User(Entity):
     role: Role
 
     def __post_init__(self):
-        assert self.username, "Username is required."
-        assert self.password_hash, "Password hash is required."
+        assert self.username.strip(), "Username is required."
+        assert self.password_hash.strip(), "Password hash is required."
+        assert self.full_name, "Full name is required."
+        assert self.role, "Role is required."
 
     @property
     def user_id(self) -> Id | None:

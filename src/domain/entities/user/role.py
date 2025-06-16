@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from enum import Enum
 
 from domain.entities.entity import Entity, Id
 
@@ -13,8 +14,8 @@ class Role(Entity):
     description: str
 
     def __post_init__(self):
-        assert self.name, "Role name is required."
-        assert self.description, "Role description is required."
+        assert self.name.strip(), "Role name is required."
+        assert self.description.strip(), "Role description is required."
 
     @property
     def role_id(self) -> Id | None:
@@ -31,3 +32,20 @@ class Role(Entity):
             name=name,
             description=description,
         )
+
+
+class RoleEnum(Enum):
+    """
+    Entity representing a user role.
+    """
+
+    ADMIN = Role(
+        entity_id=Id(1),
+        name="Администратор",
+        description="Суперпользователь, имеет полный доступ к системе, в том числе к редактированию и удалению рецептов и отзывов пользователей",
+    )
+    USER = Role(
+        entity_id=Id(2),
+        name="Пользователь",
+        description="Может добавлять рецепты и отзывы, редактировать и удалять только свои рецепты и отзывы",
+    )

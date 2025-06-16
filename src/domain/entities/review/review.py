@@ -21,7 +21,7 @@ class Review(Entity):
         assert (
             MIN_RATING <= self.rating <= MAX_RATING
         ), "Rating must be between 0 and 5."
-        assert self.text, "Review text is required."
+        assert self.text.strip(), "Review text is required."
         assert self.recipe_id, "Recipe ID is required."
         assert self.user_id, "User ID is required."
 

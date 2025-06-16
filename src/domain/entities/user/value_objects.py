@@ -8,8 +8,8 @@ class FullName:
     patronymic: str | None
 
     def __post_init__(self):
-        assert (
-            self.patronymic and not self.patronymic.strip()
+        assert self.patronymic is None or (
+            self.patronymic and self.patronymic.strip()
         ), "Patronymic must be None or non-empty string"
 
         assert (
