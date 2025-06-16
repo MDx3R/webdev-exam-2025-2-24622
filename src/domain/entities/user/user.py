@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 from domain.entities.entity import Entity, Id
+from domain.entities.user.value_objects import FullName
 
 from .role import Role
 
@@ -13,21 +14,29 @@ class User(Entity):
 
     username: str
     password_hash: str
-    last_name: str
-    first_name: str
-    patronymic: str | None
+    full_name: FullName
     role: Role
 
     def __post_init__(self):
         assert self.username, "Username is required."
         assert self.password_hash, "Password hash is required."
-        assert self.last_name, "Last name is required."
-        assert self.first_name, "First name is required."
-        if self.patronymic is not None:
-            assert (
-                self.patronymic.strip()
-            ), "Patronymic must be non-empty or None."
 
     @property
     def user_id(self) -> Id | None:
         return self.id
+
+    @classmethod
+    def create(
+        cls,
+        username: str,
+        password_hash: str,
+        full_name: FullName,
+        role: Role,
+    ) -> "User":
+        return cls(
+            entity_id=None,
+            username=username,
+            password_hash=password_hash,
+            full_name=full_name,
+            role=role,
+        )

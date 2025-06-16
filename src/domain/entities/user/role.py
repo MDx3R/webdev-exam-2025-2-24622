@@ -19,3 +19,15 @@ class Role(Entity):
     @property
     def role_id(self) -> Id | None:
         return self.id
+
+    @classmethod
+    def create(
+        cls,
+        name: str,
+        description: str,
+    ) -> "Role":
+        return cls(
+            entity_id=None,
+            name=name,
+            description=description,
+        )
