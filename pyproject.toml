@@ -40,3 +40,6 @@ ignore = ["D203", "D213", "E501"]  # D203 и D213 конфликтуют, E501 �
 combine-as-imports = true
 known-first-party = ["domain"]
 lines-after-imports = 2
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
