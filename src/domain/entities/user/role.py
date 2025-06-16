@@ -1,16 +1,21 @@
 from dataclasses import dataclass
 
+from domain.entities.entity import Entity, Id
+
 
 @dataclass
-class Role:
+class Role(Entity):
     """
     Entity representing a user role.
     """
 
-    role_id: int | None
     name: str
     description: str
 
     def __post_init__(self):
         assert self.name, "Role name is required."
         assert self.description, "Role description is required."
+
+    @property
+    def role_id(self) -> Id | None:
+        return self.id

@@ -1,15 +1,16 @@
 from dataclasses import dataclass
 
+from domain.entities.entity import Entity, Id
+
 from .role import Role
 
 
 @dataclass
-class User:
+class User(Entity):
     """
     Aggregate root for User.
     """
 
-    user_id: int | None
     username: str
     password_hash: str
     last_name: str
@@ -26,3 +27,7 @@ class User:
             assert (
                 self.patronymic.strip()
             ), "Patronymic must be non-empty or None."
+
+    @property
+    def user_id(self) -> Id | None:
+        return self.id
