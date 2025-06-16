@@ -1,0 +1,2 @@
+MIN_RATING = 0
+MAX_RATING = 5
