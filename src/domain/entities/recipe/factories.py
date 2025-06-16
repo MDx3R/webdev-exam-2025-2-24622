@@ -28,11 +28,7 @@ class IRecipeFactory(ABC):
 
 
 class RecipeFactory(IRecipeFactory):
-    def __init__(self, image_factory: IRecipeImageFactory) -> None:
-        self.image_factory = image_factory
-
     def create(self, data: RecipeData) -> Recipe:
-        images = [self.image_factory.create(i) for i in data.images]
         content = RecipeContent.create(
             title=data.title, description=data.description
         )
@@ -48,5 +44,5 @@ class RecipeFactory(IRecipeFactory):
             details=details,
             instruction=instruction,
             author_id=data.author_id,
-            images=images,
+            images=[],
         )

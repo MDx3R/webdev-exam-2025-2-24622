@@ -17,4 +17,3 @@ class RecipeData:
     ingredients: str
     steps: str
     author_id: int
-    images: list[RecipeImageData]

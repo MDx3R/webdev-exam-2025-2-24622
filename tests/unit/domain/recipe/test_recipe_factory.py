@@ -1,6 +1,4 @@
-from dataclasses import replace
 from typing import Any
-from unittest.mock import Mock
 
 import pytest
 
@@ -89,21 +87,6 @@ class TestRecipeFactory:
         assert recipe.instruction.steps == self.valid_data.steps.strip()
         assert recipe.author_id.value == self.valid_data.author_id
         assert recipe.images == []
-
-    def test_create_with_images_calls_image_factory(self):
-        mock_image = RecipeImage.create(
-            filename=self.valid_image_data.filename,
-            mime_type=self.valid_image_data.mime_type,
-            recipe_id=self.valid_image_data.recipe_id,
-        )
-        self.image_factory.create = Mock(return_value=mock_image)
-        data = replace(self.valid_data, images=[self.valid_image_data])
-        recipe = self.recipe_factory.create(data)
-        self.image_factory.create.assert_called_once_with(
-            self.valid_image_data
-        )
-        assert len(recipe.images) == 1
-        assert recipe.images[0].filename == self.valid_image_data.filename
 
     @pytest.mark.parametrize(
         "field,value,error",

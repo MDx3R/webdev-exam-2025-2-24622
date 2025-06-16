@@ -25,7 +25,6 @@ def valid_recipe_data() -> dict[str, Any]:
         "ingredients": "Beetroot, potato, carrot, onion, beef",
         "steps": "1. Prep\n2. Cook\n3. Serve",
         "author_id": 10,
-        "images": [],
     }
 
 
@@ -47,5 +46,5 @@ def recipe_image_factory() -> RecipeImageFactory:
 
 
 @pytest.fixture
-def recipe_factory(recipe_image_factory: RecipeImageFactory) -> RecipeFactory:
-    return RecipeFactory(image_factory=recipe_image_factory)
+def recipe_factory() -> RecipeFactory:
+    return RecipeFactory()
