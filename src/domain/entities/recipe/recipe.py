@@ -29,6 +29,9 @@ class Recipe(Entity):
     def recipe_id(self) -> Id | None:
         return self.id
 
+    def is_owner(self, user_id: int) -> bool:
+        return self.author_id.value == user_id
+
     def add_image(self, image: RecipeImage) -> None:
         self.images.append(image)
 
