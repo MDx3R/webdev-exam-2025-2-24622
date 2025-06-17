@@ -5,6 +5,7 @@ from application.commands.recipe.create_recipe_command import (
 )
 from application.dtos.recipe.recipe_dto import RecipeDTO
 from application.dtos.user.user_descriptor import UserDescriptor
+from application.interfaces.services.image_store import IImageStore
 from application.interfaces.usecases.recipe.create_recipe_usecase import (
     ICreateRecipeUseCase,
 )
@@ -23,10 +24,12 @@ class CreateRecipeUseCase(ICreateRecipeUseCase):
         recipe_factory: IRecipeFactory,
         image_factory: IRecipeImageFactory,
         recipe_repository: IRecipeRepository,
+        image_store: IImageStore,
     ):
         self.recipe_factory = recipe_factory
         self.image_factory = image_factory
         self.recipe_repository = recipe_repository
+        self.image_store = image_store
 
     @transactional
     def execute(
@@ -48,18 +51,22 @@ class CreateRecipeUseCase(ICreateRecipeUseCase):
 
         if command.images:
             images = [
-                self.image_factory.create(
-                    RecipeImageData(
-                        filename=str(uuid4()),
-                        mime_type=i.mime_type,
-                        recipe_id=recipe.id_safe.value,
-                    )
+                (
+                    self.image_factory.create(
+                        RecipeImageData(
+                            filename=str(uuid4()),
+                            mime_type=i.mime_type,
+                            recipe_id=recipe.id_safe.value,
+                        )
+                    ),
+                    i.content,
                 )
                 for i in command.images
             ]
 
-            for image in images:
+            for image, content in images:
                 recipe.add_image(image)
+                self.image_store.upload(image.filename, content)
 
             recipe = self.recipe_repository.save(recipe)
 

@@ -33,15 +33,20 @@ class TestCreateRecipeUseCase:
         mock_recipe_repository: Mock,
         mock_recipe_factory: Mock,
         mock_recipe_image_factory: Mock,
+        mock_image_store: Mock,
     ) -> None:
         self.mock_recipe_repository = mock_recipe_repository
         self.mock_recipe_factory = mock_recipe_factory
         self.mock_recipe_image_factory = mock_recipe_image_factory
+        self.mock_image_store = mock_image_store
+
         self.use_case = CreateRecipeUseCase(
             recipe_factory=self.mock_recipe_factory,
             image_factory=mock_recipe_image_factory,
             recipe_repository=self.mock_recipe_repository,
+            image_store=mock_image_store,
         )
+
         self.image = UploadImageCommand(
             mime_type="image/jpeg", content=BytesIO()
         )
@@ -148,3 +153,4 @@ class TestCreateRecipeUseCase:
         assert (
             self.mock_recipe_repository.save.call_count == 2  # noqa: PLR2004
         )
+        assert self.mock_image_store.upload.call_count == 1

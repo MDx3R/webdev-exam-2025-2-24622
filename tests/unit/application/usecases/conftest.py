@@ -3,6 +3,7 @@ from unittest.mock import MagicMock, Mock, create_autospec
 
 import pytest
 
+from application.interfaces.services.image_store import IImageStore
 from application.interfaces.services.password_hash_service import (
     IPasswordHasher,
 )
@@ -57,6 +58,11 @@ def mock_review_repository():
 @pytest.fixture
 def mock_password_hasher():
     return create_autospec(IPasswordHasher, instance=True)
+
+
+@pytest.fixture
+def mock_image_store():
+    return create_autospec(IImageStore, instance=True)
 
 
 @pytest.fixture(autouse=True)
