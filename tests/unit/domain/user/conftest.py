@@ -14,7 +14,7 @@ def valid_user_data() -> dict[str, Any]:
         "surname": "Doe",
         "name": "John",
         "patronymic": None,
-        "role": RoleEnum.USER,
+        "role": RoleEnum.USER.value,
     }
 
 
