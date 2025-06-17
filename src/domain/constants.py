@@ -5,3 +5,4 @@ ALLOWED_MIME_TYPES = {
     "image/png",
     "image/webp",
 }
+MAX_PER_PAGE = 10
