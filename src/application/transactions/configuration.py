@@ -1,17 +1,17 @@
 from .transaction_manager import ITransactionManager
 
 
-class CurrentITransactionManager:
+class CurrentTransactionManager:
     _manager: ITransactionManager | None = None
 
     @classmethod
-    def set_transaction_manager(cls, manager: ITransactionManager):
+    def set(cls, manager: ITransactionManager):
         cls._manager = manager
 
     @classmethod
-    def get_transaction_manager(cls) -> ITransactionManager | None:
+    def get(cls) -> ITransactionManager | None:
         return cls._manager
 
     @classmethod
-    def reset_transaction_manager(cls):
+    def reset(cls):
         cls._manager = None
