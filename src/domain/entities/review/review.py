@@ -3,6 +3,7 @@ from datetime import datetime
 
 from domain.constants import MAX_RATING, MIN_RATING
 from domain.entities.entity import Entity, Id
+from domain.entities.user.user import User
 
 
 @dataclass
@@ -46,3 +47,9 @@ class Review(Entity):
             text=text,
             created_at=created_at,
         )
+
+
+@dataclass(frozen=True)
+class AuthoredReview:
+    review: Review
+    author: User
