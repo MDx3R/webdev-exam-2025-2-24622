@@ -54,7 +54,7 @@ def session_factory(db: Database):
 
 class Container(containers.DeclarativeContainer):
     wiring_config = containers.WiringConfiguration(
-        packages=["presentation", "run", "infrastrcuture"],
+        packages=["presentation", "run", "infrastructure"],
     )
 
     config = providers.Singleton(Config.load)

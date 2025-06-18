@@ -16,7 +16,7 @@ class TestBleachMarkdownSanitizer:
 
     def test_sanitize_with_default_tags(self):
         with patch(
-            "infrastrcuture.presentation.sanitizer.bleach_markdown_sanitizer.ALLOWED_TAGS",
+            "infrastructure.presentation.sanitizer.bleach_markdown_sanitizer.ALLOWED_TAGS",
             ["b"],
         ):
             sanitizer = BleachMarkdownSanitizer(allowed_tags=None)
