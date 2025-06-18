@@ -9,6 +9,19 @@ from dotenv import load_dotenv
 from pydantic import BaseModel
 
 
+ALLOWED_TAGS = [
+    "p",
+    "ul",
+    "ol",
+    "li",
+    "strong",
+    "em",
+    "h1",
+    "h2",
+    "h3",
+]
+
+
 class RunEnvironment(str, Enum):
     LOCAL = "local"
     DEV = "dev"
