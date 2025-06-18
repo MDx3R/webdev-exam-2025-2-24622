@@ -1,6 +1,6 @@
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, Text
 
-from infrastrcuture.sqlalchemy.models.base import Base
+from infrastructure.sqlalchemy.models.base import Base
 
 
 class ReviewModel(Base):

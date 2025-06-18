@@ -1,4 +1,4 @@
-from infrastrcuture.password_hasher.bcrypt_password_hasher import (
+from infrastructure.password_hasher.bcrypt_password_hasher import (
     BcryptPasswordHasher,
 )
 

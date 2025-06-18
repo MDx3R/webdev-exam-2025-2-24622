@@ -1,6 +1,6 @@
 import bleach
 
-from infrastrcuture.config.config import ALLOWED_TAGS
+from infrastructure.config.config import ALLOWED_TAGS
 from presentation.sanitizer.markdown_sanitizer import IMarkdownSanitizer
 
 

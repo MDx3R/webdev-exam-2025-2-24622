@@ -2,7 +2,7 @@ from sqlalchemy import Engine, MetaData, create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 
-from infrastrcuture.config.config import DatabaseConfig
+from infrastructure.config.config import DatabaseConfig
 
 
 class Database:

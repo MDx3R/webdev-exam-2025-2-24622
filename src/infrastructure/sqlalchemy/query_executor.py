@@ -10,8 +10,8 @@ from sqlalchemy.sql.dml import (
     ReturningUpdate,
 )
 
-from infrastrcuture.sqlalchemy.models.base import Base
-from infrastrcuture.sqlalchemy.transactions import SQLAlchemyTransactionManager
+from infrastructure.sqlalchemy.models.base import Base
+from infrastructure.sqlalchemy.transactions import SQLAlchemyTransactionManager
 
 
 RESULT = TypeVar("RESULT", bound=Base)

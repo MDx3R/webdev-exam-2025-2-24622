@@ -3,21 +3,21 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 
 from application.transactions.configuration import CurrentTransactionManager
-from infrastrcuture.config.config import Config
-from infrastrcuture.sqlalchemy.database import Database
-from infrastrcuture.sqlalchemy.initializer.initializer import initialize_data
-from infrastrcuture.sqlalchemy.models.base import Base
-from infrastrcuture.sqlalchemy.query_executor import QueryExecutor
-from infrastrcuture.sqlalchemy.repositories.recipe_repository import (
+from infrastructure.config.config import Config
+from infrastructure.sqlalchemy.database import Database
+from infrastructure.sqlalchemy.initializer.initializer import initialize_data
+from infrastructure.sqlalchemy.models.base import Base
+from infrastructure.sqlalchemy.query_executor import QueryExecutor
+from infrastructure.sqlalchemy.repositories.recipe_repository import (
     SQLAlchemyRecipeRepository,
 )
-from infrastrcuture.sqlalchemy.repositories.review_repository import (
+from infrastructure.sqlalchemy.repositories.review_repository import (
     SQLAlchemyReviewRepository,
 )
-from infrastrcuture.sqlalchemy.repositories.user_repository import (
+from infrastructure.sqlalchemy.repositories.user_repository import (
     SQLAlchemyUserRepository,
 )
-from infrastrcuture.sqlalchemy.transactions import SQLAlchemyTransactionManager
+from infrastructure.sqlalchemy.transactions import SQLAlchemyTransactionManager
 
 
 @pytest.fixture(scope="session")

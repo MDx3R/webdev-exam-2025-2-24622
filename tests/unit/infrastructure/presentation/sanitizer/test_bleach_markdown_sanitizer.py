@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from infrastrcuture.presentation.sanitizer.bleach_markdown_sanitizer import (
+from infrastructure.presentation.sanitizer.bleach_markdown_sanitizer import (
     BleachMarkdownSanitizer,
 )
 

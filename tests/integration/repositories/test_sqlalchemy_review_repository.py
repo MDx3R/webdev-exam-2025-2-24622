@@ -8,13 +8,13 @@ from domain.entities.review.review import Review
 from domain.entities.user.role import RoleEnum
 from domain.entities.user.user import User
 from domain.entities.user.value_objects import FullName
-from infrastrcuture.sqlalchemy.repositories.review_repository import (
+from infrastructure.sqlalchemy.repositories.review_repository import (
     SQLAlchemyReviewRepository,
 )
-from infrastrcuture.sqlalchemy.repositories.user_repository import (
+from infrastructure.sqlalchemy.repositories.user_repository import (
     SQLAlchemyUserRepository,
 )
-from infrastrcuture.sqlalchemy.transactions import SQLAlchemyTransactionManager
+from infrastructure.sqlalchemy.transactions import SQLAlchemyTransactionManager
 
 
 class Counter:

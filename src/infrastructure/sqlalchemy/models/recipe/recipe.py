@@ -1,7 +1,7 @@
 from sqlalchemy import Column, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import relationship
 
-from infrastrcuture.sqlalchemy.models.base import Base
+from infrastructure.sqlalchemy.models.base import Base
 
 
 class RecipeModel(Base):

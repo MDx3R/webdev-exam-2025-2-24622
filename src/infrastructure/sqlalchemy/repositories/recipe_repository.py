@@ -13,9 +13,9 @@ from domain.entities.recipe.value_objects import (
     RecipeInstruction,
 )
 from domain.repositories.recipe_repository import IRecipeRepository
-from infrastrcuture.sqlalchemy.models import RecipeImageModel, RecipeModel
-from infrastrcuture.sqlalchemy.query_executor import QueryExecutor
-from infrastrcuture.sqlalchemy.transactions import SQLAlchemyTransactionManager
+from infrastructure.sqlalchemy.models import RecipeImageModel, RecipeModel
+from infrastructure.sqlalchemy.query_executor import QueryExecutor
+from infrastructure.sqlalchemy.transactions import SQLAlchemyTransactionManager
 
 
 class SQLAlchemyRecipeRepository(IRecipeRepository):

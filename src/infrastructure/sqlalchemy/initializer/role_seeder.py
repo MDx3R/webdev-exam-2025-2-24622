@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
 from domain.entities.user.role import RoleEnum
-from infrastrcuture.sqlalchemy.models.role import RoleModel
+from infrastructure.sqlalchemy.models.role import RoleModel
 
 
 def seed_roles(session: Session) -> None:

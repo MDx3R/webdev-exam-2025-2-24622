@@ -23,29 +23,29 @@ from application.usecases.user.logout_user_usecase import LogoutUserUseCase
 from domain.clock import GlobalClock, SystemClock
 from domain.entities.recipe.factories import RecipeFactory, RecipeImageFactory
 from domain.entities.review.factories import ReviewFactory
-from infrastrcuture.config.config import Config
-from infrastrcuture.password_hasher.bcrypt_password_hasher import (
+from infrastructure.config.config import Config
+from infrastructure.password_hasher.bcrypt_password_hasher import (
     BcryptPasswordHasher,
 )
-from infrastrcuture.presentation.presentators.markdown_renderer import (
+from infrastructure.presentation.presentators.markdown_renderer import (
     MarkdownRenderer,
 )
-from infrastrcuture.presentation.sanitizer.bleach_markdown_sanitizer import (
+from infrastructure.presentation.sanitizer.bleach_markdown_sanitizer import (
     BleachMarkdownSanitizer,
 )
-from infrastrcuture.sqlalchemy.database import Database
-from infrastrcuture.sqlalchemy.query_executor import QueryExecutor
-from infrastrcuture.sqlalchemy.repositories.recipe_repository import (
+from infrastructure.sqlalchemy.database import Database
+from infrastructure.sqlalchemy.query_executor import QueryExecutor
+from infrastructure.sqlalchemy.repositories.recipe_repository import (
     SQLAlchemyRecipeRepository,
 )
-from infrastrcuture.sqlalchemy.repositories.review_repository import (
+from infrastructure.sqlalchemy.repositories.review_repository import (
     SQLAlchemyReviewRepository,
 )
-from infrastrcuture.sqlalchemy.repositories.user_repository import (
+from infrastructure.sqlalchemy.repositories.user_repository import (
     SQLAlchemyUserRepository,
 )
-from infrastrcuture.sqlalchemy.transactions import SQLAlchemyTransactionManager
-from infrastrcuture.store.image.local_image_store import LocalImageStore
+from infrastructure.sqlalchemy.transactions import SQLAlchemyTransactionManager
+from infrastructure.store.image.local_image_store import LocalImageStore
 
 
 def session_factory(db: Database):

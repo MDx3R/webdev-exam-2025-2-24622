@@ -1,6 +1,6 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 
-from infrastrcuture.sqlalchemy.models.base import Base
+from infrastructure.sqlalchemy.models.base import Base
 
 
 class RecipeImageModel(Base):

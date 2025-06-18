@@ -9,9 +9,9 @@ sys.path.append(
     os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src"))
 )
 
-from infrastrcuture.config.config import Config
-from infrastrcuture.sqlalchemy.database import Database
-from infrastrcuture.sqlalchemy.models.base import Base
+from infrastructure.config.config import Config
+from infrastructure.sqlalchemy.database import Database
+from infrastructure.sqlalchemy.models.base import Base
 
 
 # this is the Alembic Config object, which provides

@@ -1,7 +1,7 @@
 from application.transactions.configuration import CurrentTransactionManager
 from di.container import Container
-from infrastrcuture.server.flask.app import FlaskServer
-from infrastrcuture.sqlalchemy.database import Database
+from infrastructure.server.flask.app import FlaskServer
+from infrastructure.sqlalchemy.database import Database
 
 
 class App:

@@ -8,10 +8,10 @@ from domain.entities.user.role import Role
 from domain.entities.user.user import User
 from domain.entities.user.value_objects import FullName
 from domain.repositories.user_repository import IUserRepository
-from infrastrcuture.sqlalchemy.models.role import RoleModel
-from infrastrcuture.sqlalchemy.models.user import UserModel
-from infrastrcuture.sqlalchemy.query_executor import QueryExecutor
-from infrastrcuture.sqlalchemy.transactions import SQLAlchemyTransactionManager
+from infrastructure.sqlalchemy.models.role import RoleModel
+from infrastructure.sqlalchemy.models.user import UserModel
+from infrastructure.sqlalchemy.query_executor import QueryExecutor
+from infrastructure.sqlalchemy.transactions import SQLAlchemyTransactionManager
 
 
 class SQLAlchemyUserRepository(IUserRepository):

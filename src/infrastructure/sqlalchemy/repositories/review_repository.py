@@ -11,11 +11,11 @@ from domain.entities.user.role import Role
 from domain.entities.user.user import User
 from domain.entities.user.value_objects import FullName
 from domain.repositories.review_repository import IReviewRepository
-from infrastrcuture.sqlalchemy.models.review import ReviewModel
-from infrastrcuture.sqlalchemy.models.role import RoleModel
-from infrastrcuture.sqlalchemy.models.user import UserModel
-from infrastrcuture.sqlalchemy.query_executor import QueryExecutor
-from infrastrcuture.sqlalchemy.transactions import SQLAlchemyTransactionManager
+from infrastructure.sqlalchemy.models.review import ReviewModel
+from infrastructure.sqlalchemy.models.role import RoleModel
+from infrastructure.sqlalchemy.models.user import UserModel
+from infrastructure.sqlalchemy.query_executor import QueryExecutor
+from infrastructure.sqlalchemy.transactions import SQLAlchemyTransactionManager
 
 
 class SQLAlchemyReviewRepository(IReviewRepository):

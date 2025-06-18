@@ -3,7 +3,7 @@ from unittest.mock import MagicMock
 import pytest
 
 from application.exceptions import ApplicationError
-from infrastrcuture.sqlalchemy.transactions import (
+from infrastructure.sqlalchemy.transactions import (
     SQLAlchemyTransactionManager,
 )
 

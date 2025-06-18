@@ -12,13 +12,13 @@ from domain.entities.recipe.value_objects import (
 from domain.entities.user.role import RoleEnum
 from domain.entities.user.user import User
 from domain.entities.user.value_objects import FullName
-from infrastrcuture.sqlalchemy.repositories.recipe_repository import (
+from infrastructure.sqlalchemy.repositories.recipe_repository import (
     SQLAlchemyRecipeRepository,
 )
-from infrastrcuture.sqlalchemy.repositories.user_repository import (
+from infrastructure.sqlalchemy.repositories.user_repository import (
     SQLAlchemyUserRepository,
 )
-from infrastrcuture.sqlalchemy.transactions import SQLAlchemyTransactionManager
+from infrastructure.sqlalchemy.transactions import SQLAlchemyTransactionManager
 
 
 class Counter:
