@@ -42,6 +42,7 @@ class RecipeSummaryDTO:
     servings: int
     average_rating: float
     review_count: int
+    author_id: int
     images: list[ImageDTO]
 
     @classmethod
@@ -58,6 +59,7 @@ class RecipeSummaryDTO:
             servings=recipe.details.servings,
             average_rating=average_rating,
             review_count=review_count,
+            author_id=recipe.author_id.value,
             images=[ImageDTO.from_domain(img) for img in recipe.images],
         )
 
