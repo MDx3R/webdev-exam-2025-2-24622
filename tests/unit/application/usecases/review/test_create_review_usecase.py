@@ -1,4 +1,3 @@
-# Tests for review use case: CreateReviewUseCase
 from datetime import datetime
 from unittest.mock import Mock
 

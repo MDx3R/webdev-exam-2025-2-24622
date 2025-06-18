@@ -1,4 +1,3 @@
-# Tests for user use cases: AuthenticateUserUseCase, LogoutUserUseCase
 from unittest.mock import Mock
 
 import pytest
