@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Write Review{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1 class="mb-4 text-center">Write Review</h1>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      {{ form.rating.label(class="form-label") }}
+      {{ form.rating(class="form-select") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.text.label(class="form-label") }}
+      {{ form.text(id='review-text', class="form-control") }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<script>
+  new EasyMDE({ element: document.getElementById("review-text") });
+</script>
+{% endblock %}

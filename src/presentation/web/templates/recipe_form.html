@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ 'Add' if action == 'add' else 'Edit' }} Recipe{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1 class="mb-4 text-center">{{ 'Add' if action == 'add' else 'Edit' }} Recipe</h1>
+  <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      {{ form.title.label(class="form-label") }}
+      {{ form.title(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.description.label(class="form-label") }}
+      {{ form.description(id="description", class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.preparation_time.label(class="form-label") }}
+      {{ form.preparation_time(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.servings.label(class="form-label") }}
+      {{ form.servings(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.ingredients.label(class="form-label") }}
+      {{ form.ingredients(id="ingredients", class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.steps.label(class="form-label") }}
+      {{ form.steps(id="steps", class="form-control") }}
+    </div>
+
+    {% if action == 'add' %}
+    <div class="mb-3">
+      {{ form.images.label(class="form-label") }}
+      {{ form.images(multiple=True, class="form-control") }}
+    </div>
+    {% endif %}
+
+    <div class="d-grid">
+      <button type="submit" class="btn btn-primary btn-block">Save</button>
+    </div>
+  </form>
+</div>
+
+<!-- EasyMDE -->
+<script>
+  new EasyMDE({ element: document.getElementById("description") });
+  new EasyMDE({ element: document.getElementById("ingredients") });
+  new EasyMDE({ element: document.getElementById("steps") });
+</script>
+{% endblock %}

@@ -12,6 +12,7 @@ from flask_login import (  # type: ignore
     logout_user,
 )
 
+from application.exceptions import InvalidCredentialsError
 from domain.entities.user.role import RoleEnum
 from presentation.web.flask.forms import LoginForm
 from presentation.web.flask.main import FlaskUserDescriptor
@@ -31,10 +32,10 @@ def login():
         return redirect(url_for("main.index"))
     form = LoginForm()
     if form.validate_on_submit():  # type: ignore
-        user_dto = use_case.execute(
-            username=form.username.data, password=form.password.data  # type: ignore
-        )
-        if user_dto:
+        try:
+            user_dto = use_case.execute(
+                username=form.username.data, password=form.password.data  # type: ignore
+            )
             match user_dto.id:
                 case admin.id_safe.value:
                     role = admin
@@ -51,8 +52,10 @@ def login():
 
             flash("Logged in.", "success")
             return redirect(url_for("main.index"))
-
-        flash("Invalid credentials.", "error")
+        except InvalidCredentialsError:
+            flash("Invalid credentials.", "error")
+        except Exception as e:
+            flash(str(e), "error")
 
     return render_template("login.html", form=form)
 

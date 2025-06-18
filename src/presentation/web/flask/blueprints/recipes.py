@@ -1,3 +1,5 @@
+import traceback
+
 from flask import (
     Blueprint,
     flash,
@@ -72,20 +74,22 @@ def recipe_add():
             command = CreateRecipeCommand(
                 title=form.title.data,  # type: ignore
                 description=form.description.data,  # type: ignore
-                preparation_time=form.preparation_time.data,  # type: ignore
-                servings=form.servings.data,  # type: ignore
+                preparation_time=int(form.preparation_time.data),  # type: ignore
+                servings=int(form.servings.data),  # type: ignore
                 ingredients=form.ingredients.data,  # type: ignore
                 steps=form.steps.data,  # type: ignore
                 images=images,
             )
 
-            recipe_id = use_case.execute(command, get_current_user())
+            recipe = use_case.execute(command, get_current_user())
 
             flash("Recipe created successfully.", "success")
             return redirect(
-                url_for("recipes.recipe_view", recipe_id=recipe_id)
+                url_for("recipes.recipe_view", recipe_id=recipe.id)
             )
         except Exception as e:
+            print("Exception occurred:", e)
+            traceback.print_exc()
             flash(str(e), "error")
 
     return render_template("recipe_form.html", form=form, action="add")
@@ -114,8 +118,8 @@ def recipe_edit(recipe_id: int):
                 recipe_id=recipe_id,
                 title=form.title.data,  # type: ignore
                 description=form.description.data,  # type: ignore
-                preparation_time=form.preparation_time.data,  # type: ignore
-                servings=form.servings.data,  # type: ignore
+                preparation_time=int(form.preparation_time.data),  # type: ignore
+                servings=int(form.servings.data),  # type: ignore
                 ingredients=form.ingredients.data,  # type: ignore
                 steps=form.steps.data,  # type: ignore
             )

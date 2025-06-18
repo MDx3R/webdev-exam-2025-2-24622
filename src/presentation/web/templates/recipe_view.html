@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ recipe_dto.recipe.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1 class="mb-3 text-center">{{ recipe_dto.recipe.title }}</h1>
+  <p class="text-center text-muted">By {{ recipe_dto.author.username }}</p>
+
+  <div class="recipe-details mb-5">
+    <div class="row mb-3 text-center">
+      <div class="col-md">
+        <p><strong>Preparation Time:</strong> {{ recipe_dto.recipe.preparation_time }} minutes</p>
+      </div>
+      <div class="col-md">
+        <p><strong>Servings:</strong> {{ recipe_dto.recipe.servings }}</p>
+      </div>
+      <div class="col-md">
+        <p><strong>Average Rating:</strong> {{ recipe_dto.summary.average_rating|round(2) }} ({{ recipe_dto.summary.review_count }} reviews)</p>
+      </div>
+    </div>
+
+    {% if recipe_dto.recipe.images %}
+    <div id="recipe-images" class="d-flex flex-wrap justify-content-center mb-4 gap-3">
+      {% for image in recipe_dto.recipe.images %}
+      <img
+        src="{{ url_for('static', filename='uploads/' + image.filename) }}"
+        alt="Recipe Image"
+        class="img-thumbnail"
+        style="max-height: 200px;"
+      />
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <h4>Description</h4>
+    <div class="mb-4">{{ recipe_dto.recipe.description|safe }}</div>
+
+    <h4>Ingredients</h4>
+    <div class="mb-4">{{ recipe_dto.recipe.ingredients|safe }}</div>
+
+    <h4>Steps</h4>
+    <div class="mb-5">{{ recipe_dto.recipe.steps|safe }}</div>
+  </div>
+
+  <h4 class="mb-3">Reviews</h4>
+  <div class="reviews mb-5">
+    {% for authored_review in recipe_dto.reviews %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ authored_review.user.username }} ({{ authored_review.review.rating }}/5)</h5>
+        <p class="card-text">{{ authored_review.review.text|safe }}</p>
+        <p class="card-subtitle text-muted small">{{ authored_review.review.created_at }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if current_user.is_authenticated %}
+    {% if not recipe_dto.reviews|selectattr('review.user_id', 'equalto', current_user.user_id)|list %}
+    <h4 class="mb-3">Write a Review</h4>
+    <form method="POST" action="{{ url_for('recipes.review_create', recipe_id=recipe_dto.recipe.id) }}">
+      {{ review_form.hidden_tag() }}
+
+      <div class="mb-3">
+        {{ review_form.rating.label(class="form-label") }}
+        {{ review_form.rating(class="form-select") }}
+      </div>
+
+      <div class="mb-3">
+        {{ review_form.text.label(class="form-label") }}
+        {{ review_form.text(id='review-text', class="form-control") }}
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit Review</button>
+    </form>
+    {% else %}
+    <p class="text-success">You have already reviewed this recipe.</p>
+    {% endif %}
+  {% endif %}
+</div>
+
+<script>
+  new Viewer(document.getElementById("recipe-images"));
+  new EasyMDE({ element: document.getElementById("review-text") });
+</script>
+{% endblock %}

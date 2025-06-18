@@ -9,7 +9,8 @@ login_manager = LoginManager()
 
 
 class FlaskUserDescriptor(UserDescriptor, UserMixin):
-    pass
+    def get_id(self) -> str:
+        return str(self.user_id)
 
 
 def get_current_user() -> FlaskUserDescriptor:
@@ -22,9 +23,10 @@ def init_login_manager(app: Flask, user_repo: IUserRepository):
     login_manager.login_message = "Для доступа к данной странице необходимо пройти процедуру аутентификации."
     login_manager.login_message_category = "warning"
 
-    def load_user(user_id: int) -> FlaskUserDescriptor:
-        user = user_repo.get_by_id(user_id)
-        return FlaskUserDescriptor(user_id, user.username, user.role)
+    def load_user(user_id: str) -> FlaskUserDescriptor:
+        print("-----------------------", type(user_id))
+        user = user_repo.get_by_id(int(user_id))
+        return FlaskUserDescriptor(int(user_id), user.username, user.role)
 
     login_manager.user_loader(load_user)  # type: ignore
     login_manager.init_app(app)  # type: ignore
