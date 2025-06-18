@@ -1,5 +1,6 @@
 from application.transactions.configuration import CurrentTransactionManager
 from di.container import Container
+from infrastructure.config.config import BASE_FILE_DIR
 from infrastructure.server.flask.app import FlaskServer
 from infrastructure.sqlalchemy.database import Database
 
@@ -11,7 +12,9 @@ class App:
         self.config = self.container.config()
 
         self.database = Database(self.config.DB)
-        self.server = FlaskServer(self.container)
+        self.server = FlaskServer(
+            BASE_FILE_DIR, self.container, self.config.AUTH
+        )
 
     def configure(self):
         CurrentTransactionManager.set(self.container.transaction_manager())

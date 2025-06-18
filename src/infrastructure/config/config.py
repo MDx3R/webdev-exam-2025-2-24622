@@ -9,6 +9,10 @@ from dotenv import load_dotenv
 from pydantic import BaseModel
 
 
+BASE_DIR = os.path.join(os.getcwd(), "src")
+BASE_FILE_DIR = os.path.join(BASE_DIR, "presentation", "web")
+BASE_UPLOAD_DIR = os.path.join(BASE_FILE_DIR, "static", "uploads")
+
 ALLOWED_TAGS = [
     "p",
     "ul",
@@ -58,8 +62,8 @@ class DatabaseConfig(BaseModel):
 
 
 class FileStoreConfig(BaseModel):
-    TYPE: str = "local"
-    ACCESS: str = "uploads"
+    TYPE: Literal["local", "temp"] = "local"
+    ACCESS: str = BASE_UPLOAD_DIR
 
 
 class Config(BaseModel):
