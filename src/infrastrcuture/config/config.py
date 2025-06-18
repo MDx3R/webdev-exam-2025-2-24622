@@ -57,10 +57,16 @@ class DatabaseConfig(BaseModel):
         )
 
 
+class FileStoreConfig(BaseModel):
+    TYPE: str = "local"
+    ACCESS: str = "uploads"
+
+
 class Config(BaseModel):
     ENV: RunEnvironment
     AUTH: AuthConfig
     DB: DatabaseConfig
+    FILE: FileStoreConfig
 
     @classmethod
     def load(cls) -> "Config":
