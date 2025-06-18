@@ -1,3 +1,4 @@
+import mimetypes
 from uuid import uuid4
 
 from application.commands.recipe.create_recipe_command import (
@@ -54,7 +55,7 @@ class CreateRecipeUseCase(ICreateRecipeUseCase):
                 (
                     self.image_factory.create(
                         RecipeImageData(
-                            filename=str(uuid4()),
+                            filename=f"{uuid4()}{mimetypes.guess_extension(i.mime_type) or ''}",
                             mime_type=i.mime_type,
                             recipe_id=recipe.id_safe.value,
                         )
