@@ -66,7 +66,7 @@ class Config(BaseModel):
     ENV: RunEnvironment
     AUTH: AuthConfig
     DB: DatabaseConfig
-    FILE: FileStoreConfig
+    FILE: FileStoreConfig = FileStoreConfig()
 
     @classmethod
     def load(cls) -> "Config":
