@@ -1,9 +1,12 @@
 from abc import ABC, abstractmethod
+from collections.abc import Iterator
+from contextlib import contextmanager
 from typing import BinaryIO
 
 
 class IImageStore(ABC):
     @abstractmethod
-    def get(self, filename: str) -> BinaryIO: ...
+    @contextmanager
+    def get(self, filename: str) -> Iterator[BinaryIO]: ...
     @abstractmethod
     def upload(self, filename: str, content: BinaryIO) -> None: ...
