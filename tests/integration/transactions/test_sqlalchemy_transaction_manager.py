@@ -70,10 +70,8 @@ class TestSQLAlchemyTransactionManager:
     def test_transaction_rollback(self):
         user = self._get_user()
         with pytest.raises(ValueError, match="Test rollback"):
-            print("begin")
             with self.transaction_manager:
                 self._create_user(user)
-                print("raise")
                 raise ValueError("Test rollback")
 
         assert not self._is_user_saved(user)

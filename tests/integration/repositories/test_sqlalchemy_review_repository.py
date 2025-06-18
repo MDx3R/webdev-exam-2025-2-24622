@@ -99,7 +99,6 @@ class TestSQLAlchemyReviewRepository:
 
     def test_get_with_author_by_recipe_id_success(self):
         user = self._get_user()
-        print(user)
         recipe_id = 1
         with self.transaction_manager:
             saved_user = self.user_repository.save(user)

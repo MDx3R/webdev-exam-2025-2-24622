@@ -24,7 +24,6 @@ def init_login_manager(app: Flask, user_repo: IUserRepository):
     login_manager.login_message_category = "warning"
 
     def load_user(user_id: str) -> FlaskUserDescriptor:
-        print("-----------------------", type(user_id))
         user = user_repo.get_by_id(int(user_id))
         return FlaskUserDescriptor(int(user_id), user.username, user.role)
 

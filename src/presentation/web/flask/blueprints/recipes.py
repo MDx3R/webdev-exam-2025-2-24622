@@ -1,5 +1,3 @@
-import traceback
-
 from flask import (
     Blueprint,
     flash,
@@ -88,8 +86,6 @@ def recipe_add():
                 url_for("recipes.recipe_view", recipe_id=recipe.id)
             )
         except Exception as e:
-            print("Exception occurred:", e)
-            traceback.print_exc()
             flash(str(e), "error")
 
     return render_template("recipe_form.html", form=form, action="add")

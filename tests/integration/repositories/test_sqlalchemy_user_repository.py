@@ -38,12 +38,10 @@ class TestSQLAlchemyUserRepository:
     def test_get_by_id_success(self):
         user = self._get_user()
         saved_user = self.user_repository.save(user)
-        print("Saved")
 
         retrieved_user = self.user_repository.get_by_id(
             saved_user.id_safe.value
         )
-        print("Got")
 
         assert retrieved_user is not None
         assert retrieved_user.username == user.username

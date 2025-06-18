@@ -103,7 +103,6 @@ class SQLAlchemyTransactionManager(ITransactionManager):
 
         try:
             yield session
-            print("successful yield")
             self._finalize_transaction(has_error=False)
         except Exception as exc:
             self._finalize_transaction(has_error=True)
@@ -120,14 +119,11 @@ class SQLAlchemyTransactionManager(ITransactionManager):
                 self.rollback()
             else:
                 self.commit()
-                print("Changes commited")
         except Exception as exc:
             self._handle_exception(exc)
         finally:
             self._close()
-            print("Session closed")
             self._reset_session()
-            print("Session reset")
 
     def _close(self):
         session = self._get_session()
