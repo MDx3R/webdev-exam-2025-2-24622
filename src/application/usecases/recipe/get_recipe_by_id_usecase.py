@@ -32,7 +32,6 @@ class GetRecipeByIdUseCase(IGetRecipeByIdUseCase):
         reviews = self.review_repository.get_with_author_by_recipe_id(
             recipe_id
         )
-        print(reviews)
         avg_rating = (
             (sum(i.review.rating for i in reviews) / len(reviews))
             if reviews
