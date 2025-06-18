@@ -62,7 +62,7 @@ class SQLAlchemyReviewRepository(IReviewRepository):
     def save(self, review: Review) -> Review:
         with self.transaction_manager.get_session():
             review_model = self._to_model(review)
-            self.query_executor.save(review_model)
+            review_model = self.query_executor.save(review_model)
             return self._to_domain(review_model)
 
     def exists_for_user_and_recipe(self, user_id: int, recipe_id: int) -> bool:

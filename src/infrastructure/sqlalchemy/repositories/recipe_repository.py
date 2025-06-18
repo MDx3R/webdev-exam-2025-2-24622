@@ -53,7 +53,7 @@ class SQLAlchemyRecipeRepository(IRecipeRepository):
     def save(self, recipe: Recipe) -> Recipe:
         with self.transaction_manager.get_session():
             recipe_model = self._to_model(recipe)
-            self.query_executor.save(recipe_model)
+            recipe_model = self.query_executor.save(recipe_model)
             # Add images
             image_models = [
                 RecipeImageModel(
