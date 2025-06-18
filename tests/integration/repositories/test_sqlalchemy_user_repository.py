@@ -87,6 +87,8 @@ class TestSQLAlchemyUserRepository:
         user = self._get_user()
         saved_user = self.user_repository.save(user)
 
+        assert saved_user.id
+
         assert self.user_repository.exists_by_username(user.username)
         retrieved_user = self.user_repository.get_by_id(
             saved_user.id_safe.value

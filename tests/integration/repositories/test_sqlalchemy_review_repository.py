@@ -146,6 +146,8 @@ class TestSQLAlchemyReviewRepository:
             review = self._get_review(saved_user.id_safe.value, recipe_id)
             saved_review = self.review_repository.save(review)
 
+        assert saved_review.id
+
         with self.transaction_manager:
             retrieved_review = self.review_repository.get_by_id(
                 saved_review.id_safe.value

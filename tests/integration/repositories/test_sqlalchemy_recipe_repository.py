@@ -119,6 +119,8 @@ class TestSQLAlchemyRecipeRepository:
             recipe = self._get_recipe(saved_user.id_safe.value)
             saved_recipe = self.recipe_repository.save(recipe)
 
+        assert saved_recipe.id
+
         with self.transaction_manager:
             retrieved_recipe = self.recipe_repository.get_by_id(
                 saved_recipe.id_safe.value
