@@ -1,12 +1,7 @@
-ENV: "prod"
+ENV: "dev"
 
 DB:
-  DBMS: "postgresql"
-  DB_NAME: "database"
-  DB_USER: "postgres"
-  DB_PASSWORD: "password"
-  DB_HOST: "127.0.0.1"
-  DB_PORT: "5432"
+  DBMS: "sqlite"
   SQLITE_MEMORY: false
 
 AUTH:
