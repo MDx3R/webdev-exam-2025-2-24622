@@ -1,0 +1,14 @@
+ENV: "prod"
+
+DB:
+  DBMS: "postgresql"
+  DB_NAME: "database"
+  DB_USER: "postgres"
+  DB_PASSWORD: "password"
+  DB_HOST: "127.0.0.1"
+  DB_PORT: "5432"
+  SQLITE_MEMORY: false
+
+AUTH:
+  SECRET_KEY: "secret-key"
+  ALGORITHM: "HS256"
