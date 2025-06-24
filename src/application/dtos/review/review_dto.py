@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Self
 
 from application.dtos.user.user_dto import UserDTO
 from domain.entities.review.review import Review
@@ -32,7 +31,7 @@ class AuthoredReviewDTO:
     user: UserDTO
 
     @classmethod
-    def from_domain(cls, review: Review, user: User) -> Self:
+    def from_domain(cls, review: Review, user: User) -> "AuthoredReviewDTO":
         return cls(
             review=ReviewDTO.from_domain(review),
             user=UserDTO.from_domain(user),

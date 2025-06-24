@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Self
 
 from domain.entities.recipe.image import RecipeImage
 
@@ -10,5 +9,5 @@ class ImageDTO:
     mime_type: str
 
     @classmethod
-    def from_domain(cls, image: RecipeImage) -> Self:
+    def from_domain(cls, image: RecipeImage) -> "ImageDTO":
         return cls(filename=image.filename, mime_type=image.mime_type)

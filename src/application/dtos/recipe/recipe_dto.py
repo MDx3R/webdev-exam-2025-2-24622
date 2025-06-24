@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Self
 
 from application.dtos.image.image_dto import ImageDTO
 from application.dtos.review.review_dto import AuthoredReviewDTO
@@ -20,7 +19,7 @@ class RecipeDTO:
     images: list[ImageDTO]
 
     @classmethod
-    def from_domain(cls, recipe: Recipe) -> Self:
+    def from_domain(cls, recipe: Recipe) -> "RecipeDTO":
         return cls(
             id=recipe.id_safe.value,
             title=recipe.content.title,
@@ -51,7 +50,7 @@ class RecipeSummaryDTO:
         recipe: Recipe,
         average_rating: float,
         review_count: int,
-    ) -> Self:
+    ) -> "RecipeSummaryDTO":
         return cls(
             id=recipe.id_safe.value,
             title=recipe.content.title,
@@ -78,7 +77,7 @@ class FullRecipeDTO:
         author: UserDTO,
         reviews: list[AuthoredReviewDTO],
         summary: RecipeSummaryDTO,
-    ) -> Self:
+    ) -> "FullRecipeDTO":
         return cls(
             recipe=recipe, author=author, reviews=reviews, summary=summary
         )

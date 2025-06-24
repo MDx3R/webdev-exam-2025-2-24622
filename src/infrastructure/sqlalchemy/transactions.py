@@ -2,7 +2,6 @@ import re
 from collections.abc import Generator
 from contextlib import contextmanager
 from contextvars import ContextVar
-from typing import Self
 
 import psycopg2.errors
 import sqlalchemy.exc
@@ -65,7 +64,7 @@ class SQLAlchemyTransactionManager(ITransactionManager):
 
         raise exception
 
-    def __enter__(self) -> Self:
+    def __enter__(self) -> "ITransactionManager":
         existing_session = self._get_session()
         if (
             not existing_session

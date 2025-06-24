@@ -1,5 +1,3 @@
-from typing import Self
-
 import pytest
 import sqlalchemy
 import sqlalchemy.exc
@@ -104,10 +102,10 @@ class TestSQLAlchemyTransactionManager:
         user = self._get_user()
 
         @transactional
-        def func(self: Self) -> User:
+        def func() -> User:
             return self._create_user(user)
 
-        result = func(self)
+        result = func()
         assert result is not None
         assert result.username == user.username
         assert self._is_user_saved(user)
@@ -116,29 +114,29 @@ class TestSQLAlchemyTransactionManager:
         user = self._get_user()
 
         @transactional
-        def func(self: Self) -> User:
+        def func() -> User:
             self._create_user(user)
             raise ValueError("Test rollback")
 
         with pytest.raises(ValueError, match="Test rollback"):
-            func(self)
+            func()
         assert not self._is_user_saved(user)
 
     def test_transactional_creates_session(self):
         @transactional
-        def func(self: Self):
+        def func():
             assert self._get_session() is not None
 
-        func(self)
+        func()
 
     def test_transactional_shares_transaction(self):
         @transactional
-        def func(self: Self):
+        def func():
             outer = self._get_session()
             with self.transaction_manager:
                 assert id(outer) == id(self._get_session())
 
-        func(self)
+        func()
 
     def test_applicaion_exception_raises(self):
         with pytest.raises(ApplicationError, match="Some error"):

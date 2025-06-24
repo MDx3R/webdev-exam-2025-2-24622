@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import Self
 
 
 class ITransactionManager(ABC):
@@ -8,7 +7,7 @@ class ITransactionManager(ABC):
     @abstractmethod
     def commit(self): ...
     @abstractmethod
-    def __enter__(self) -> Self: ...
+    def __enter__(self) -> "ITransactionManager": ...
     @abstractmethod
     def __exit__(
         self,
