@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Self
 
 from domain.entities.user.user import User
 
@@ -14,7 +13,7 @@ class UserDTO:
     role: str
 
     @classmethod
-    def from_domain(cls, user: User) -> Self:
+    def from_domain(cls, user: User) -> "UserDTO":
         return cls(
             id=user.id_safe.value,
             username=user.username,
