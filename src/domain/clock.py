@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
-from datetime import UTC, date, datetime, time, timezone
+from datetime import date, datetime, time, timezone
 
 
 class Clock(ABC):
     def __init__(self) -> None:
-        self._tzinfo = UTC
+        self._tzinfo = timezone.utc
 
     @abstractmethod
     def now(self) -> datetime: ...
@@ -43,5 +43,5 @@ class GlobalClock:
     def now(cls) -> datetime:
         if cls._clock is None:
             # По умолчанию системное время UTC
-            return datetime.now(UTC)
+            return datetime.now(timezone.utc)
         return cls._clock.now()
