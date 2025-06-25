@@ -53,6 +53,11 @@ class SQLAlchemyUserRepository(IUserRepository):
 
         return self._to_domain(user_model, role_model)
 
+    def exists(self, user_id: int) -> bool:
+        statement = select(1).where(UserModel.id == user_id)
+        user_model = self.query_executor.execute_scalar_one(statement)
+        return bool(user_model)
+
     def exists_by_username(self, username: str) -> bool:
         statement = select(1).where(UserModel.username == username)
         user_model = self.query_executor.execute_scalar_one(statement)

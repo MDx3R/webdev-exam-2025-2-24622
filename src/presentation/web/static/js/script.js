@@ -1,25 +1,24 @@
-function confirmDelete(recipeId, recipeTitle) {
-  const modal = document.createElement("div");
-  modal.className = "modal";
-  modal.innerHTML = `
-        <div class="modal-content">
-            <h2>Delete Recipe</h2>
-            <p>Are you sure you want to delete "${recipeTitle}"?</p>
-            <button onclick="submitDelete(${recipeId})">Yes</button>
-            <button onclick="closeModal()">No</button>
-        </div>
-    `;
-  document.body.appendChild(modal);
+function showDeleteModal(recipeTitle, url) {
+  const modal = new bootstrap.Modal(document.getElementById("deleteModal"));
+  const body = document.getElementById("deleteModalBody");
+  const form = document.getElementById("deleteModalForm");
+
+  body.textContent = `Вы уверены, что хотите удалить рецепт "${recipeTitle}"?`;
+  form.action = url;
+
+  modal.show();
 }
 
-function submitDelete(recipeId) {
-  const form = document.querySelector(
-    `form[action="/recipe/delete/${recipeId}"]`
-  );
-  form.submit();
-}
-
-function closeModal() {
-  const modal = document.querySelector(".modal");
-  if (modal) modal.remove();
-}
+window.addEventListener("DOMContentLoaded", () => {
+  const gallery = document.getElementById("recipe-images");
+  if (gallery) {
+    new Viewer(gallery);
+  }
+  const reviewText = document.getElementById("review-text");
+  if (reviewText) {
+    new EasyMDE({
+      element: reviewText,
+      forceSync: true,
+    });
+  }
+});
