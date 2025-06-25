@@ -27,5 +27,8 @@ class LocalImageStore(IImageStore):
 
     def upload(self, filename: str, content: BinaryIO) -> None:
         full_path = self._full_path(filename)
+        if os.path.exists(full_path):
+            raise FileExistsError(f"Image '{filename}' already exists.")
+        full_path = self._full_path(filename)
         with open(full_path, "wb") as f:
             f.write(content.read())

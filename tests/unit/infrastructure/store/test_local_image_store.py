@@ -32,6 +32,12 @@ class TestLocalImageStore:
     def build_path(self, filename: str) -> str:
         return os.path.join(self.dir, filename)
 
+    def test_store_creates_dir_when_not_exists(self):
+        dir = f"{self.dir}/testdir"
+        assert not os.path.exists(dir)
+        LocalImageStore(dir)
+        assert os.path.exists(dir)
+
     def test_get_retrieves_image_successfully(self):
         with self.store.get(self.filename) as file:
             retrieved = file
