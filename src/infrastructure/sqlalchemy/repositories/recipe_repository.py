@@ -57,14 +57,15 @@ class SQLAlchemyRecipeRepository(IRecipeRepository):
             # Add images
             image_models = [
                 RecipeImageModel(
+                    id=img.id.value if img.id else None,
                     filename=img.filename,
                     mime_type=img.mime_type,
                     recipe_id=recipe_model.id,
                 )
                 for img in recipe.images
             ]
-            if image_models:
-                self.query_executor.add_all(image_models)
+            for image in image_models:
+                self.query_executor.save(image)
             return self._to_domain(recipe_model)
 
     def remove(self, recipe: Recipe) -> None:
