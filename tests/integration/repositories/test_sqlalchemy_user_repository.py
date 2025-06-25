@@ -81,6 +81,19 @@ class TestSQLAlchemyUserRepository:
 
         assert exists is False
 
+    def test_exists_true(self):
+        user = self._get_user()
+        self.user_repository.save(user)
+
+        exists = self.user_repository.exists(user.id_safe.value)
+
+        assert exists is True
+
+    def test_exists_false(self):
+        exists = self.user_repository.exists(999)
+
+        assert exists is False
+
     def test_save_user_success(self):
         user = self._get_user()
         saved_user = self.user_repository.save(user)
