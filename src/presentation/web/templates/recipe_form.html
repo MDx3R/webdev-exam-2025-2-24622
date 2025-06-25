@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ 'Add' if action == 'add' else 'Edit' }} Recipe{% endblock %}
+{% block title %}{{ 'Добавить' if action == 'add' else 'Редактировать' }} рецепт{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-  <h1 class="mb-4 text-center">{{ 'Add' if action == 'add' else 'Edit' }} Recipe</h1>
+  <h1 class="mb-4 text-center">{{ 'Добавить' if action == 'add' else 'Редактировать' }} рецепт</h1>
   <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
     {{ form.hidden_tag() }}
 
@@ -15,7 +15,7 @@
 
     <div class="mb-3">
       {{ form.description.label(class="form-label") }}
-      {{ form.description(id="description", class="form-control") }}
+      {{ form.description(id="description", class="form-control", rows=4) }}
     </div>
 
     <div class="mb-3">
@@ -30,12 +30,12 @@
 
     <div class="mb-3">
       {{ form.ingredients.label(class="form-label") }}
-      {{ form.ingredients(id="ingredients", class="form-control") }}
+      {{ form.ingredients(id="ingredients", class="form-control", rows=4) }}
     </div>
 
     <div class="mb-3">
       {{ form.steps.label(class="form-label") }}
-      {{ form.steps(id="steps", class="form-control") }}
+      {{ form.steps(id="steps", class="form-control", rows=4) }}
     </div>
 
     {% if action == 'add' %}
@@ -46,15 +46,18 @@
     {% endif %}
 
     <div class="d-grid">
-      <button type="submit" class="btn btn-primary btn-block">Save</button>
+      <button type="submit" class="btn btn-primary btn-block">Сохранить</button>
     </div>
   </form>
 </div>
 
 <!-- EasyMDE -->
 <script>
-  new EasyMDE({ element: document.getElementById("description") });
-  new EasyMDE({ element: document.getElementById("ingredients") });
-  new EasyMDE({ element: document.getElementById("steps") });
+  window.addEventListener("DOMContentLoaded", () => {
+    const minHeight = "120px"
+    new EasyMDE({ element: document.getElementById("description"), minHeight, });
+    new EasyMDE({ element: document.getElementById("ingredients"), minHeight, });
+    new EasyMDE({ element: document.getElementById("steps"), minHeight, });
+  });
 </script>
 {% endblock %}

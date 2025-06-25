@@ -38,8 +38,11 @@ def allowed_file(filename: str):
 @recipes_bp.route("/<int:recipe_id>")
 def recipe_view(recipe_id: int):
     use_case = get_container().get_recipe_uc()
+    markdown_renderer = get_container().markdown_renderer()
+
     try:
         recipe_dto = use_case.execute(recipe_id)
+        recipe_dto = markdown_renderer.render_full_recipe(recipe_dto)
         return render_template(
             "recipe_view.html", recipe_dto=recipe_dto, review_form=ReviewForm()
         )
@@ -131,7 +134,7 @@ def recipe_edit(recipe_id: int):
     )
 
 
-@recipes_bp.route("/delete/<int:recipe_id>", methods=["POST"])
+@recipes_bp.route("/<int:recipe_id>/delete", methods=["POST"])
 @login_required
 def recipe_delete(recipe_id: int):
     use_case = get_container().delete_recipe_uc()
@@ -150,10 +153,11 @@ def review_create(recipe_id: int):
     form = ReviewForm()
     if form.validate_on_submit():  # type: ignore
         try:
+            print(form)
             command = CreateReviewCommand(
                 recipe_id=recipe_id,
                 user_id=get_current_user().user_id,
-                rating=form.rating.data,
+                rating=int(form.rating.data),
                 text=form.text.data,  # type: ignore
             )
             use_case.execute(command, get_current_user())

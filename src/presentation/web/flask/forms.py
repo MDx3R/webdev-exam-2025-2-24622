@@ -9,7 +9,7 @@ from wtforms import (
     StringField,
     TextAreaField,
 )
-from wtforms.validators import DataRequired, NumberRange
+from wtforms.validators import DataRequired, InputRequired, NumberRange
 
 from domain.constants import ALLOWED_TYPES
 
@@ -42,7 +42,9 @@ class ReviewForm(FlaskForm):
         ],
         coerce=int,
         default=5,
-        validators=[DataRequired()],
+        validators=[
+            InputRequired()
+        ],  # fix: DataRequired doesn't process "Terrible" mark properly because of 0
     )
     text = TextAreaField("Review", validators=[DataRequired()])
 

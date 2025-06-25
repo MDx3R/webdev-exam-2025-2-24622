@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Write Review{% endblock %}
+{% block title %}Оставить отзыв{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-  <h1 class="mb-4 text-center">Write Review</h1>
+  <h1 class="mb-4 text-center">Оставить отзыв</h1>
   <form method="POST">
     {{ form.hidden_tag() }}
 
@@ -15,14 +15,10 @@
 
     <div class="mb-3">
       {{ form.text.label(class="form-label") }}
-      {{ form.text(id='review-text', class="form-control") }}
+      {{ form.text(id='review-text', class="form-control", required=true) }}
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Отправить</button>
   </form>
 </div>
-
-<script>
-  new EasyMDE({ element: document.getElementById("review-text") });
-</script>
 {% endblock %}

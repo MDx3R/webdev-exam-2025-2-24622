@@ -1,10 +1,17 @@
 {% extends 'base.html' %}
 
-{% block title %}Recipes{% endblock %}
+{% from 'modal_macros.html' import delete_modal %}
+
+{% block title %}Рецепты{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-  <h1 class="mb-4 text-center">Recipes</h1>
+  <h1 class="mb-4 text-center">Рецепты</h1>
+  {% if current_user.is_authenticated %}
+  <div class="d-flex justify-content-end mb-3">
+    <a href="{{ url_for('recipes.recipe_add') }}" class="btn btn-primary">Добавить рецепт</a>
+  </div>
+  {% endif %}
 
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     {% for recipe in recipes %}
@@ -14,36 +21,30 @@
         <img
           src="{{ url_for('static', filename='uploads/' + recipe.images[0].filename) }}"
           class="card-img-top"
-          alt="Recipe Image"
+          alt="Изображение рецепта"
         />
         {% endif %}
         <div class="card-body">
           <h5 class="card-title">{{ recipe.title }}</h5>
           <p class="card-text">
-            <strong>Preparation Time:</strong> {{ recipe.preparation_time }} minutes<br />
-            <strong>Servings:</strong> {{ recipe.servings }}<br />
-            <strong>Average Rating:</strong> {{ recipe.average_rating|round(2) }} 
-            ({{ recipe.review_count }} reviews)
+            <strong>Время приготовления:</strong> {{ recipe.preparation_time }} минут<br />
+            <strong>Порций:</strong> {{ recipe.servings }}<br />
+            <strong>Средний рейтинг:</strong> {{ recipe.average_rating|round(2) }} 
+            ({{ recipe.review_count }} отзывов)
           </p>
         </div>
         <div class="card-footer d-flex justify-content-between align-items-center">
-          <a href="{{ url_for('recipes.recipe_view', recipe_id=recipe.id) }}" class="btn btn-sm btn-outline-primary">View</a>
+          <a href="{{ url_for('recipes.recipe_view', recipe_id=recipe.id) }}" class="btn btn-sm btn-outline-primary">Просмотр</a>
           {% if current_user.is_authenticated and (current_user.role.name == 'Администратор' or recipe.author_id == current_user.user_id) %}
           <div class="d-flex gap-2">
-            <a href="{{ url_for('recipes.recipe_edit', recipe_id=recipe.id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
-            <form
-              action="{{ url_for('recipes.recipe_delete', recipe_id=recipe.id) }}"
-              method="POST"
-              class="d-inline"
+            <a href="{{ url_for('recipes.recipe_edit', recipe_id=recipe.id) }}" class="btn btn-sm btn-outline-secondary">Редактировать</a>
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-danger"
+              onclick="showDeleteModal('{{ recipe.title }}', '{{ url_for('recipes.recipe_delete', recipe_id=recipe.id) }}')"
             >
-              <button
-                type="button"
-                class="btn btn-sm btn-outline-danger"
-                onclick="confirmDelete({{ recipe.id }}, '{{ recipe.title|escape }}')"
-              >
-                Delete
-              </button>
-            </form>
+              Удалить
+            </button>
           </div>
           {% endif %}
         </div>
@@ -51,15 +52,22 @@
     </div>
     {% endfor %}
   </div>
+  
+  {% if recipes %}
+    <div class="d-flex justify-content-center align-items-center mt-4 gap-3">
+      {% if page > 1 %}
+      <a href="{{ url_for('main.index', page=page-1) }}" class="btn btn-outline-secondary">Предыдущая</a>
+      {% endif %}
+      <span>Страница {{ page }}</span>
+      {% if recipes|length == 10 %}
+      <a href="{{ url_for('main.index', page=page+1) }}" class="btn btn-outline-secondary">Следующая</a>
+      {% endif %}
+    </div>
+  {% endif %}
 
-  <div class="d-flex justify-content-center align-items-center mt-4 gap-3">
-    {% if page > 1 %}
-    <a href="{{ url_for('main.index', page=page-1) }}" class="btn btn-outline-secondary">Previous</a>
-    {% endif %}
-    <span>Page {{ page }}</span>
-    {% if recipes|length == 10 %}
-    <a href="{{ url_for('main.index', page=page+1) }}" class="btn btn-outline-secondary">Next</a>
-    {% endif %}
-  </div>
+  {{ delete_modal(
+    modal_id='deleteModal',
+    title='Удалить рецепт',
+  ) }}
 </div>
 {% endblock %}
