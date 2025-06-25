@@ -153,7 +153,6 @@ def review_create(recipe_id: int):
     form = ReviewForm()
     if form.validate_on_submit():  # type: ignore
         try:
-            print(form)
             command = CreateReviewCommand(
                 recipe_id=recipe_id,
                 user_id=get_current_user().user_id,
