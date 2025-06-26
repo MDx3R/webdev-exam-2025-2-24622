@@ -56,17 +56,19 @@ def login():
             flash("Invalid credentials.", "error")
         except Exception as e:
             flash(str(e), "error")
-
     return render_template("login.html", form=form)
 
 
-@auth_bp.route("/logout")
+@auth_bp.route("/logout", methods=["POST"])
 @login_required
 def logout():
     use_case = get_container().logout_uc()
 
-    use_case.execute(descriptor=current_user)  # type: ignore
-    logout_user()
+    try:
+        use_case.execute(descriptor=current_user)  # type: ignore
+        logout_user()
+        flash("Logged out.", "success")
+    except Exception as e:
+        flash(str(e), "error")
 
-    flash("Logged out.", "success")
     return redirect(url_for("main.index"))

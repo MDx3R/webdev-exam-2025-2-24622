@@ -36,6 +36,7 @@ def init_login_manager(app: Flask, user_repo: IUserRepository):
             # Защита от падения при некорректном user_id и др. ошибках
             session.clear()
             logout_user()
+
         return None
 
     login_manager.user_loader(load_user)  # type: ignore
