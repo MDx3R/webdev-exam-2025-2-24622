@@ -22,6 +22,9 @@ class App:
         self.server.configure()
         self.server.setup_routes()
 
+    def shutdown(self):
+        self.database.shutdown()
+
     def run(self):
         self.server.app.run()
         self.database.shutdown()

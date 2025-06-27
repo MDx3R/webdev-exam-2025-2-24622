@@ -1,16 +1,16 @@
-from flask import Blueprint, render_template, request
+from flask import render_template, request
+from flask.views import MethodView
 
-from presentation.web.flask.utils import get_container
+from application.interfaces.usecases.recipe.list_recipes_usecase import (
+    IListRecipesUseCase,
+)
 
 
-main_bp = Blueprint("main", __name__)
+class IndexView(MethodView):
+    def __init__(self, list_recipes_uc: IListRecipesUseCase):
+        self.list_recipes_uc = list_recipes_uc
 
-
-@main_bp.route("/")
-def index():
-    use_case = get_container().list_recipes_uc()
-
-    page = int(request.args.get("page", 1))
-    recipes = use_case.execute(page=page, per_page=10)
-
-    return render_template("index.html", recipes=recipes, page=page)
+    def get(self):
+        page = int(request.args.get("page", 1))
+        recipes = self.list_recipes_uc.execute(page=page, per_page=10)
+        return render_template("index.html", recipes=recipes, page=page)

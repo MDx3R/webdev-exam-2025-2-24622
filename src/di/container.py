@@ -46,6 +46,7 @@ from infrastructure.sqlalchemy.repositories.user_repository import (
 )
 from infrastructure.sqlalchemy.transactions import SQLAlchemyTransactionManager
 from infrastructure.store.image.local_image_store import LocalImageStore
+from presentation.web.flask.main import FlaskLoginManager
 
 
 def session_factory(db: Database):
@@ -121,3 +122,6 @@ class Container(containers.DeclarativeContainer):
         AuthenticateUserUseCase, user_repo, password_hasher
     )
     logout_uc = providers.Singleton(LogoutUserUseCase)
+
+    # ---------------------- Flask ----------------------
+    login_manager = providers.Singleton(FlaskLoginManager, user_repo=user_repo)
