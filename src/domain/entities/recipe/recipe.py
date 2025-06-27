@@ -39,7 +39,7 @@ class Recipe(Entity):
     def ensure_can_mutate(self, user_id: int, role: Role):
         if not self.can_mutate(user_id, role):
             raise PermissionError(
-                "Insufficient permissions to delete this recipe."
+                "Insufficient permissions to change this recipe."
             )
 
     def update(
