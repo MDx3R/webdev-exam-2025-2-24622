@@ -1,8 +1,15 @@
 from infrastructure.app.app import App
 
 
-if __name__ == "__main__":
+def create_app():
     _app = App()
     _app.configure()
-    app = _app.get_server()
-    _app.run()
+    return _app
+
+
+# Entry point
+app = create_app().get_server()
+
+
+if __name__ == "__main__":
+    app.run()
