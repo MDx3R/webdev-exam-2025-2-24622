@@ -1,0 +1,9 @@
+ENV: "test"
+
+DB:
+  DBMS: "sqlite"
+  SQLITE_MEMORY: true
+
+AUTH:
+  SECRET_KEY: "secret-key"
+  ALGORITHM: "HS256"

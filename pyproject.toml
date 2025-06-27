@@ -43,3 +43,7 @@ lines-after-imports = 2
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
+
+[tool.pytest_env]
+PYTHONPATH="src"
+CONFIG_PATH="config/test_config.yaml"
